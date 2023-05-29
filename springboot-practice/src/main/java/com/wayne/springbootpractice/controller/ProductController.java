@@ -1,6 +1,7 @@
 package com.wayne.springbootpractice.controller;
 
 import com.wayne.springbootpractice.constant.ProductCategory;
+import com.wayne.springbootpractice.dao.ProductQueryParams;
 import com.wayne.springbootpractice.dto.ProductRequest;
 import com.wayne.springbootpractice.model.Product;
 import com.wayne.springbootpractice.service.ProductService;
@@ -23,7 +24,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ){
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
