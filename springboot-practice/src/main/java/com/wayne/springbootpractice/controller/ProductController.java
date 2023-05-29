@@ -1,9 +1,11 @@
 package com.wayne.springbootpractice.controller;
 
+import com.wayne.springbootpractice.constant.ProductCategory;
 import com.wayne.springbootpractice.dto.ProductRequest;
 import com.wayne.springbootpractice.model.Product;
 import com.wayne.springbootpractice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(){
-        List<Product> productList = productService.getProducts();
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+    ){
+        List<Product> productList = productService.getProducts(category, search);
+
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
 

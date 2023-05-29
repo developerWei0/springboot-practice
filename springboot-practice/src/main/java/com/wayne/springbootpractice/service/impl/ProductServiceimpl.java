@@ -1,5 +1,6 @@
 package com.wayne.springbootpractice.service.impl;
 
+import com.wayne.springbootpractice.constant.ProductCategory;
 import com.wayne.springbootpractice.dao.ProductDao;
 import com.wayne.springbootpractice.dto.ProductRequest;
 import com.wayne.springbootpractice.model.Product;
@@ -15,8 +16,9 @@ public class ProductServiceimpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(){
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category,String search) {
+        return productDao.getProducts(category, search);
+
     }
 
     public Product getProductById(Integer productId){
