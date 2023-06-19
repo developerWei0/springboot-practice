@@ -1,5 +1,6 @@
 package com.wayne.springbootpractice.controller;
 
+import com.wayne.springbootpractice.dto.UserLoginRequest;
 import com.wayne.springbootpractice.dto.UserRegisterRequest;
 import com.wayne.springbootpractice.model.User;
 import com.wayne.springbootpractice.service.UserService;
@@ -26,4 +27,12 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest){
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
 }
